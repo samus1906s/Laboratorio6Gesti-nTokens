@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(sessionMiddleware);
 
 app.use('/api/usuario', usuarioRoutes);
-app.use('/api/auth', rutasAutenticacion);
+app.use('/api/auth', authRoutes);
 app.use('/api/aplicaciones', aplicacionesRoutes);
 app.use('/api/productos', productosRoutes);
 
