@@ -3,6 +3,7 @@ import session from 'express-session';
 import dotenv from 'dotenv';
 
 import usuarioRoutes from './routes/usuario.routes.js';
+import sessionMiddleware from "./config/session.js";
 import authRoutes from './routes/auth.routes.js';
 import aplicacionesRoutes from './routes/aplicaciones.routes.js';
 import productosRoutes from './routes/productos.routes.js';
@@ -13,20 +14,10 @@ const app = express();
 
 app.use(express.json());
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || 'secreto_temporal',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60, // 1 hora
-    },
-  })
-);
+app.use(sessionMiddleware);
 
 app.use('/api/usuario', usuarioRoutes);
-app.use('/api/auth', authRoutes);
+app.use('/api/auth', rutasAutenticacion);
 app.use('/api/aplicaciones', aplicacionesRoutes);
 app.use('/api/productos', productosRoutes);
 
