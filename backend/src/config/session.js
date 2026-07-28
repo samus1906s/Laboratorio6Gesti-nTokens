@@ -1,19 +1,19 @@
 import session from "express-session";
 
-const middlewareSesion = session ({
+const middlewareSesion = session({
+  secret:
+    process.env.SESSION_SECRET ||
+    "clave_temporal_laboratorio",
 
-    secret: process.env.SESSION_SECRET || "clase1234",
+  resave: false,
+  saveUninitialized: false,
 
-    resave: false,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax",
+    maxAge: 1000 * 60 * 60,
+  },
+});
 
-    saveUninitialized: false,
-
-    cookie: {
-        httpOnly: true,
-        secure: false,
-        sameSite: "lax",
-        maxAge: 100*60*60,
-    },
-})
-
-export default sesionMiddleware;
+export default middlewareSesion;
