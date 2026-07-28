@@ -4,21 +4,19 @@ import {
   iniciarSesion,
   consultarPerfil,
   cerrarSesion,
-} from "../controllers/autenticacion.controller.js";
+} from "../controllers/auth.controller.js";
 
 import {
   requerirAutenticacion,
-} from "../middlewares/autenticacion.middleware.js";
+} from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-
 router.post("/login", iniciarSesion);
-
 
 router.get(
   "/perfil",
-  requerirAutenticacion,  /* ESTAS ACÁ SERIAN LAS RUTAS PROTEGIDAS DE SESIÓN */
+  requerirAutenticacion,
   consultarPerfil,
 );
 
